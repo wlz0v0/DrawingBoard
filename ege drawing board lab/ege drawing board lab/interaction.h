@@ -1,0 +1,9 @@
+void initialize();            //初始化函数
+int readFile(void);           //读取文件函数
+void kbmenu();                //根据读取文件的结果显示键盘菜单
+void kbpainting();            //键盘作图函数
+void mousepaintinit_graph();  //鼠标操作初始化图片部分函数
+void mousepaintinit_text();   //鼠标操作初始化文本部分函数
+void mousemenu();             //显示鼠标操作菜单
+void mousepainting();         //鼠标作图函数
+void reset(int);              //重置函数

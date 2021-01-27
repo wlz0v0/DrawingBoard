@@ -1,0 +1,49 @@
+﻿  allpaint_support.cpp
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(5,2): warning C4091: “typedef ”: 没有声明变量时忽略“Point”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“color”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“DATA”的左侧
+  datasave.cpp
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(5,2): warning C4091: “typedef ”: 没有声明变量时忽略“Point”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“color”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“DATA”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(52,16): warning C4018: “<”: 有符号/无符号不匹配
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(120,16): warning C4018: “<=”: 有符号/无符号不匹配
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(206,16): warning C4018: “<”: 有符号/无符号不匹配
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(203,7): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(204,2): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(205,2): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(209,3): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(210,3): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(211,3): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(212,3): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(213,3): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(214,3): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(217,4): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(219,3): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(235,16): warning C4018: “<”: 有符号/无符号不匹配
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.cpp(232,7): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  interaction.cpp
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(5,2): warning C4091: “typedef ”: 没有声明变量时忽略“Point”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“color”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“DATA”的左侧
+  kbpaint_support.cpp
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(5,2): warning C4091: “typedef ”: 没有声明变量时忽略“Point”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“color”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“DATA”的左侧
+  main.cpp
+  mousepaint_support.cpp
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(5,2): warning C4091: “typedef ”: 没有声明变量时忽略“Point”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“color”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\datasave.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“DATA”的左侧
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\mousepaint_support.cpp(71,32): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\mousepaint_support.cpp(72,32): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\mousepaint_support.cpp(73,32): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\mousepaint_support.cpp(74,32): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\mousepaint_support.cpp(75,32): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\mousepaint_support.cpp(110,32): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\mousepaint_support.cpp(111,32): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\mousepaint_support.cpp(112,32): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\mousepaint_support.cpp(113,32): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+C:\MyProject\C\ege drawing board lab\ege drawing board lab\mousepaint_support.cpp(114,32): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+  正在生成代码...
+  ege drawing board lab.vcxproj -> C:\MyProject\C\ege drawing board lab\x64\Debug\ege drawing board lab.exe
