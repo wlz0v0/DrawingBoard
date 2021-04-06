@@ -1,2 +1,2 @@
 # DrawingBoard
-This is a drawing board based on ege library.
+This is a drawing board based on ege library.(C)
