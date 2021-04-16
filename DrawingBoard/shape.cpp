@@ -1,9 +1,11 @@
 #include <graphics.h>
 #include <iostream>
 #include <cmath>
+#include <iterator>
 #include "shape.h"
 
 using std::endl;
+std::vector<Shape*> Shape::shapes;
 
 Shape::Shape(int type_) :
 	color(),
@@ -55,6 +57,10 @@ Point Shape::getPt2()
 	return pt2;
 }
 
+size_t Shape::getShapeCount()
+{
+	return Shape::shapes.size();
+}
 
 Line::Line() :
 	Shape(typeLine)
@@ -170,4 +176,54 @@ std::istream& operator>>(std::istream& is, Rectangle_& rectangle)
 	is >> rectangle.type >> rectangle.isFill >> rectangle.color
 		>> rectangle.pt1 >> rectangle.pt2;
 	return is;
+}
+
+void drawAShape(Shape& shape, bool isFill_)
+{
+	mouse_msg msg1, msg2;
+	shape.setIsFill(isFill_);
+	shape.setColor(Color(EGEGET_R(getcolor()),
+		EGEGET_G(getcolor()),
+		EGEGET_B(getcolor())));
+	while (true)
+	{
+		msg1 = getmouse();
+		if (msg1.is_left() && msg1.is_down())
+		{
+			shape.setPt1(msg1.x - 500, msg1.y - 20); //坐标换算
+			if (shape.getPt1() > Point(0, 0))
+				break;
+			xyprintf(0, 510, "选点必须在可画区域内！");
+		}
+	}
+	while (true)
+	{
+		msg2 = getmouse();
+		if (msg2.is_left() && msg2.is_down())
+		{
+			shape.setPt2(msg2.x - 500, msg2.y - 20); //坐标换算
+			if (shape.getPt2() > Point(0, 0))
+				break;
+			xyprintf(0, 510, "选点必须在可画区域内！");
+		}
+	}
+	shape.drawShape();
+	Shape::shapes.push_back(&shape);
+}
+
+void drawShapes()
+{
+	for (auto it = Shape::shapes.begin(); it != Shape::shapes.end(); it++)
+	{
+		(*it)->drawShape();
+	}
+}
+
+void clearShapes()
+{
+	for (auto it = Shape::shapes.begin(); it != Shape::shapes.end(); it++)
+	{
+		delete *it;
+	}
+	Shape::shapes.clear();
 }

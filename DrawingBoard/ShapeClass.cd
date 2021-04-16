@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Shape" Collapsed="true">
+    <Position X="4.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAEAAAAQAAAAAAAAAAAAAABAQABBECAgAAAgCAIAAA=</HashCode>
+      <FileName>shape.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Line" Collapsed="true">
+    <Position X="0.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACABAAA=</HashCode>
+      <FileName>shape.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Circle" Collapsed="true">
+    <Position X="4.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>shape.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rectangle_" Collapsed="true">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>shape.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

@@ -1,7 +1,14 @@
 #ifndef COLOR_H
 #define COLOR_H
+// 本头文件中包含了颜色类
+
 #include <iostream>
 
+// 颜色类
+// 字段中包含颜色的RGB属性
+// 方法中包含根据颜色设置画图颜色和填充颜色
+// 重载了流输入输出运算符
+// 还包含一个全局颜色数组的声明，里面有预先设定好的颜色
 class Color
 {
 public:

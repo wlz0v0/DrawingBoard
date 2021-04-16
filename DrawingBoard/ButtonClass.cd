@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ButtonBase" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAEIAAAAAAAABQAA=</HashCode>
+      <FileName>buttonBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColorButton" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgCAAAAIAAAAAAAABAAA=</HashCode>
+      <FileName>colorButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShapeButton" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAgABAAAABAAA=</HashCode>
+      <FileName>shapeButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OperationButton" Collapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAABAIAAABAAAABAAA=</HashCode>
+      <FileName>operationButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LineButton" Collapsed="true">
+    <Position X="0.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAQIAAAAAAAABAAA=</HashCode>
+      <FileName>shapeButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CircleButton" Collapsed="true">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAABIAAAAAAAABAAA=</HashCode>
+      <FileName>shapeButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RectangleButton" Collapsed="true">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIQAAAAAAAAAAAAIAAAAAAAABAAA=</HashCode>
+      <FileName>shapeButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExitButton" Collapsed="true">
+    <Position X="6.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAIAAAAAAAABAAA=</HashCode>
+      <FileName>operationButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClearButton" Collapsed="true">
+    <Position X="8.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAA=</HashCode>
+      <FileName>operationButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CancelButton" Collapsed="true">
+    <Position X="10.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAABAABAAA=</HashCode>
+      <FileName>operationButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestoreButton" Collapsed="true">
+    <Position X="12.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAA=</HashCode>
+      <FileName>operationButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReadButton" Collapsed="true">
+    <Position X="14.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAA=</HashCode>
+      <FileName>operationButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WriteButton" Collapsed="true">
+    <Position X="16.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAEAABAAA=</HashCode>
+      <FileName>operationButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

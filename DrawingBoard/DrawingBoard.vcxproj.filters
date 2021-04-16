@@ -21,21 +21,30 @@
     <ClCompile Include="shape.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="paintBoard.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="color.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="point.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="buttonBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="colorButton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="shapeButton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="operationButton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="drawingBoard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shape.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="paintBoard.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="color.h">
@@ -44,10 +53,33 @@
     <ClInclude Include="point.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="buttonBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="colorButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="shapeButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="operationButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="drawingBoard.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="hehe.txt">
       <Filter>资源文件</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ButtonClass.cd">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="ShapeClass.cd">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
