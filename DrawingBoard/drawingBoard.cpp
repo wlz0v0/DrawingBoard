@@ -1,6 +1,7 @@
 #include <vector>
 #include <graphics.h>
 #include <iterator>
+#include <algorithm>
 #include "drawingBoard.h"
 
 std::vector<ButtonBase*> DrawingBoard::buttons;
@@ -75,21 +76,9 @@ void DrawingBoard::initialize()
 	setcaption("托马斯小火车画板（1440*720，有效大小为920*680)");     //设置画板名称
 	setbkcolor(WHITE);                                             //设置背景颜色
 	setcolor(BLACK);                                               //设置字体颜色
-	/*setfont(60, 0, "楷体");                                        //设置字体样式
-	xyprintf(350, 200, "是否读取文件？");
-	xyprintf(350, 270, "1.是");
-	xyprintf(350, 340, "2.否");
-	int msg = getch();
-
-	cleardevice();
-	if (msg == '1')
-	{
-		//读取文件
-		//画出图形
-	}*/
-	setcolor(BLACK);
-	setfillcolor(WHITE);
 	setfont(16, 0, "楷体");                                        //设置字体样式
+	setfillcolor(WHITE);
+
 	line(499, 20, 499, 720);                                       //打印一条竖线分隔画图区域
 	line(499, 19, 1440, 19);                                       //打印一条横线分隔画图区域
 	//以下打印坐标基本点                           
@@ -115,7 +104,7 @@ void DrawingBoard::initialize()
 	xyprintf(0, 300, "本画板使用鼠标画图时，默认颜色和填充色均为黑色；");
 	xyprintf(0, 330, "点击各个边框内可以进行操作；");
 	xyprintf(0, 360, "右上角两个箭头，左边是撤销右边是复原；");
-	xyprintf(0, 390, "画图时需点击鼠标左键两次：");
+	xyprintf(0, 390, "画图时需点击鼠标左键两次，画图形时点一次图形只能画一个：");
 	xyprintf(0, 420, "1.画直线时，选取两点，在两点之间画直线；");
 	xyprintf(0, 450, "2.画圆时，第一次选取圆心，第二点与第一点之间的距离为半径；");
 	xyprintf(0, 480, "3.画矩形时，选取两点，以这两个点分别为矩形的对角线的点。");
@@ -131,21 +120,31 @@ void DrawingBoard::chooseOperations()
 		choice = getmouse();
 		if (choice.is_down() && choice.is_left())
 		{
-			for (auto it = buttons.begin(); it != buttons.end(); it++)
+			auto it = std::find_if(buttons.begin(),
+				buttons.end(),
+				[&choice](ButtonBase* aButton) { return aButton->isClicked(choice); });
+			if (it != buttons.end())
+				(*it)->operation();
+			/*for (auto it = buttons.begin(); it != buttons.end(); it++)
 			{
 				if ((*it)->isClicked(choice))
 				{
 					(*it)->operation();
 					break;
 				}
-			}
+			}*/
 		}
 
 		if (isExit)
 		{
-			clearBuffer();
-			clearShapes();
 			return;
 		}
 	}
+}
+
+void DrawingBoard::exit()
+{
+	clearBuffer(); // 清空缓冲区
+	clearShapes(); // 清空形状
+	closegraph();  // 退出画板
 }

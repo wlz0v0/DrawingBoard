@@ -11,9 +11,14 @@ Point::Point(int x_, int y_) :
 	y(y_)
 {}
 
-bool Point::operator>(const Point& pt_)
+Point::Point(const Point & rhs) :
+	x(rhs.x),
+	y(rhs.y)
+{}
+
+bool Point::operator>(const Point& rhs)
 {
-	if (x > pt_.x && y > pt_.y)
+	if (x > rhs.x && y > rhs.y)
 		return true;
 	return false;
 }

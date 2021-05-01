@@ -2,11 +2,35 @@
 #include <vector>
 #include <iterator>
 #include <fstream>
+#include <exception>
 #include "operationButton.h"
 
 extern bool isExit;
 std::vector<Shape*> OperationButton::buffer;
 std::filesystem::path filePath("file.txt");
+
+void checkInputShape(Shape& shape)
+{
+	Color colorOfShape = shape.getColor();
+	if (colorOfShape.red < 0 && colorOfShape.red > 255)
+	{
+		colorOfShape.red = 255;
+		shape.setColor(colorOfShape);
+		throw std::exception("红色值异常，已改为255");
+	}
+	if (colorOfShape.green < 0 && colorOfShape.green > 255)
+	{
+		colorOfShape.green = 255;
+		shape.setColor(colorOfShape);
+		throw std::exception("绿色值异常，已改为255");
+	}
+	if (colorOfShape.blue < 0 && colorOfShape.blue > 255)
+	{
+		colorOfShape.blue = 255;
+		shape.setColor(colorOfShape);
+		throw std::exception("蓝色值异常，已改为255");
+	}
+}
 
 OperationButton::OperationButton(const Point& pt1_, const Point& pt2_) :
 	ButtonBase(pt1_, pt2_)
@@ -112,24 +136,34 @@ void WriteButton::operation()
 	Rectangle_* aRectangle;
 	while (!ifs.eof())
 	{
-		ifs >> type;
-		switch (type)
+		try
 		{
-		case typeLine:
-			aLine = new Line;
-			ifs >> *aLine;
-			Shape::shapes.push_back(aLine);
-			break;
-		case typeCircle:
-			aCircle = new Circle;
-			ifs >> *aCircle;
-			Shape::shapes.push_back(aCircle);
-			break;
-		case typeRectangle:
-			aRectangle = new Rectangle_;
-			ifs >> *aRectangle;
-			Shape::shapes.push_back(aRectangle);
-			break;
+			ifs >> type;
+			switch (type)
+			{
+			case typeLine:
+				aLine = new Line;
+				ifs >> *aLine;
+				checkInputShape(*aLine);
+				Shape::shapes.push_back(aLine);
+				break;
+			case typeCircle:
+				aCircle = new Circle;
+				ifs >> *aCircle;
+				checkInputShape(*aCircle);
+				Shape::shapes.push_back(aCircle);
+				break;
+			case typeRectangle:
+				aRectangle = new Rectangle_;
+				ifs >> *aRectangle;
+				checkInputShape(*aRectangle);
+				Shape::shapes.push_back(aRectangle);
+				break;
+			}
+		}
+		catch (std::exception& colorError)
+		{
+			xyprintf(0, 510, colorError.what());
 		}
 	}
 	drawShapes();

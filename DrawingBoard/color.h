@@ -3,6 +3,7 @@
 // 本头文件中包含了颜色类
 
 #include <iostream>
+#include <array>
 
 // 颜色类
 // 字段中包含颜色的RGB属性
@@ -19,11 +20,12 @@ public:
 	Color();
 	Color(int red_, int green_, int blue_);
 	Color& operator=(const Color& right);
+	~Color();
 	void setGraphColor();
 	friend std::ostream& operator<<(std::ostream& os, Color& color);
 	friend std::istream& operator>>(std::istream& is, Color& color);
 };
 
-extern const Color colorset[17];
+extern const std::array<Color, 17> colorset;
 
 #endif // COLOR_H

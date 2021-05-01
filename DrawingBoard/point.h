@@ -15,6 +15,7 @@ public:
 
 	Point();
 	Point(int x_, int y_);
+	Point(const Point& rhs);
 	friend std::ostream& operator<<(std::ostream& os, Point& pt);
 	friend std::istream& operator>>(std::istream& is, Point& pt);
 	bool operator>(const Point& pt_);

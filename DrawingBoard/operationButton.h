@@ -10,7 +10,7 @@
 #if _MSVC_LANG >= 201703L || __cplusplus >= 201703L // MSVC or clang and gcc
 #include <filesystem> // C++17特性
 #else 
-#error 编译器应使用C++17及以后版本！ //提醒切换编译器版本
+#error 编译器应使用C++17及以后版本！
 #endif // _MSVC_LANG >= 201703L || __cplusplus >= 201703L
 
 // 操作按钮，用于实现各种操作

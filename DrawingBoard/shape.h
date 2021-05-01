@@ -11,7 +11,8 @@ enum TypeName
 {
 	typeLine = 1,
 	typeCircle = 2,
-	typeRectangle = 3
+	typeRectangle = 3,
+	typeTriangle = 4
 };
 
 // 形状抽象基类
@@ -31,6 +32,8 @@ public:
 	static std::vector<Shape*> shapes;
 
 	Shape(int type_);
+	Shape(const Color& color_, const Point& pt1_, const Point& pt2_,
+		bool isFill, int type);
 	virtual ~Shape() = default;
 
 	void setColor(const Color& color_);
@@ -44,7 +47,7 @@ public:
 	Point getPt2();
 	static size_t getShapeCount();
 
-	virtual void drawShape() = 0; 
+	virtual void drawShape() = 0; // draw function
 
 	friend std::ostream& operator<<(std::ostream& os, Shape& shape);
 	friend std::istream& operator>>(std::istream& is, Shape& shape);
@@ -58,6 +61,7 @@ class Line : public Shape
 {
 public:
 	Line();
+	Line(const Line& rhs);
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Line& line);
 	friend std::istream& operator>>(std::istream& is, Line& line);
@@ -71,6 +75,7 @@ class Circle : public Shape
 {
 public:
 	Circle();
+	Circle(const Circle& rhs);
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Circle& circle);
 	friend std::istream& operator>>(std::istream& is, Circle& circle);
@@ -86,9 +91,26 @@ class Rectangle_ : public Shape
 {
 public:
 	Rectangle_();
+	Rectangle_(const Rectangle_& rhs);
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Rectangle_& rectangle);
 	friend std::istream& operator>>(std::istream& is, Rectangle_& rectangle);
+};
+
+// 这个三角形类是为了作业，实际上的画板并没有画这个三角形的操作
+// 原因是在画板的操作界面在设计之初只能容纳一个直线按钮，两个圆按钮和两个矩形按纽
+// 没有给其他的图形留空间，所以仅在程序内写一个Triangle类，但在实际画板内没有画的操作
+// 
+class Triangle : public Shape
+{
+private:
+	Point pt3;
+public:
+	Triangle();
+	Triangle(const Triangle& rhs);
+	Point getPt3();
+	void setPt3(const Point& pt3_);
+	virtual void drawShape();
 };
 
 // 非成员函数

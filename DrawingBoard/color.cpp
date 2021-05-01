@@ -2,8 +2,8 @@
 #include "color.h"
 
 //这个数组存放的是各种颜色的RGB值，便于后面打印
-const Color colorset[17] = { 
-		   Color(255, 0, 0),      //红色
+const std::array<Color, 17> colorset = {
+	       Color(255, 0, 0),      //红色
 		   Color(255, 97, 0),     //橙色
 		   Color(255, 255, 0),    //黄色
 		   Color(0, 255, 0),      //绿色
@@ -34,15 +34,19 @@ Color::Color(int red_, int green_, int blue_) :
 	blue(blue_)
 {}
 
-Color& Color::operator=(const Color& right)
+Color& Color::operator=(const Color& rhs)
 {
-	if (this != &right)
+	if (this != &rhs)
 	{
-		red = right.red;
-		green = right.green;
-		blue = right.blue;
+		red = rhs.red;
+		green = rhs.green;
+		blue = rhs.blue;
 	}
 	return *this;
+}
+
+Color::~Color()
+{
 }
 
 void Color::setGraphColor()

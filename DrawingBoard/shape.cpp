@@ -15,6 +15,18 @@ Shape::Shape(int type_) :
 	pt2()
 {}
 
+Shape::Shape(const Color & color_,
+	const Point & pt1_,
+	const Point & pt2_,
+	bool isFill_,
+	int type_) :
+	color(color_),
+	pt1(pt1_),
+	pt2(pt2_),
+	isFill(isFill_),
+	type(type_)
+{}
+
 void Shape::setColor(const Color& color_)
 {
 	color = color_;
@@ -66,6 +78,14 @@ Line::Line() :
 	Shape(typeLine)
 {}
 
+Line::Line(const Line & rhs) :
+	Shape(rhs.color,
+		rhs.pt1,
+		rhs.pt2,
+		false,
+		typeLine)
+{}
+
 void Line::drawShape()
 {
 	color.setGraphColor();
@@ -76,6 +96,14 @@ void Line::drawShape()
 
 Circle::Circle() :
 	Shape(typeCircle)
+{}
+
+Circle::Circle(const Circle & rhs) :
+	Shape(rhs.color,
+		rhs.pt1,
+		rhs.pt2,
+		rhs.isFill,
+		typeCircle)
 {}
 
 //半径利用两点之间的距离计算
@@ -97,6 +125,14 @@ void Circle::drawShape()
 
 Rectangle_::Rectangle_() :
 	Shape(typeRectangle)
+{}
+
+Rectangle_::Rectangle_(const Rectangle_ & rhs) :
+	Shape(rhs.color,
+		rhs.pt1,
+		rhs.pt2,
+		rhs.isFill,
+		typeRectangle)
 {}
 
 void Rectangle_::drawShape()
@@ -226,4 +262,34 @@ void clearShapes()
 		delete *it;
 	}
 	Shape::shapes.clear();
+}
+
+Triangle::Triangle() :
+	Shape(typeTriangle),
+	pt3()
+{}
+
+Triangle::Triangle(const Triangle & rhs) :
+	Shape(rhs.color,
+		rhs.pt1,
+		rhs.pt2,
+		rhs.isFill,
+		typeTriangle),
+	pt3(rhs.pt3)
+{}
+
+Point Triangle::getPt3()
+{
+	return pt3;
+}
+
+void Triangle::setPt3(const Point& pt3_)
+{
+	pt3 = pt3_;
+}
+
+void Triangle::drawShape()
+{
+	// do nothing
+	// 使用多边形画三角形即可
 }

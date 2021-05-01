@@ -6,6 +6,6 @@ int main()
 	DrawingBoard db;
 	db.initialize();
 	db.chooseOperations();
-	closegraph();
+	db.exit();
 	return 0;
 }

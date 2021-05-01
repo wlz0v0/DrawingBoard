@@ -10,7 +10,7 @@
 
 // 画板类，用于实现画板
 // 字段包含画板中需要的各种按钮以及储存按钮的向量
-class DrawingBoard
+class DrawingBoard // controller class
 {
 private:
 	ColorButton redButton;
@@ -47,6 +47,7 @@ public:
 	DrawingBoard();
 	void initialize();
 	void chooseOperations();
+	void exit();
 };
 
 #endif // DRAWING_BOARD_H
