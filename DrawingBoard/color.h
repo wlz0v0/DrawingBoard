@@ -16,16 +16,15 @@ public:
 	int red;
 	int green;
 	int blue;
+	const static std::array<Color, 17> colorset;
 
 	Color();
-	Color(int red_, int green_, int blue_);
+	explicit Color(int red_, int green_, int blue_);
 	Color& operator=(const Color& right);
 	~Color();
 	void setGraphColor();
 	friend std::ostream& operator<<(std::ostream& os, Color& color);
 	friend std::istream& operator>>(std::istream& is, Color& color);
 };
-
-extern const std::array<Color, 17> colorset;
 
 #endif // COLOR_H

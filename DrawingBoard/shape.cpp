@@ -1,8 +1,9 @@
+#include "shape.h"
 #include <graphics.h>
 #include <iostream>
 #include <cmath>
 #include <iterator>
-#include "shape.h"
+#include <fstream>
 
 using std::endl;
 std::vector<Shape*> Shape::shapes;
@@ -26,6 +27,11 @@ Shape::Shape(const Color & color_,
 	isFill(isFill_),
 	type(type_)
 {}
+
+void Shape::setType(int type_)
+{
+	type = type_;
+}
 
 void Shape::setColor(const Color& color_)
 {
@@ -86,6 +92,10 @@ Line::Line(const Line & rhs) :
 		typeLine)
 {}
 
+Line::Line(const Point & pt1, const Point & pt2) :
+	Shape(Color(), pt1, pt2, false, typeLine)
+{}
+
 void Line::drawShape()
 {
 	color.setGraphColor();
@@ -104,6 +114,10 @@ Circle::Circle(const Circle & rhs) :
 		rhs.pt2,
 		rhs.isFill,
 		typeCircle)
+{}
+
+Circle::Circle(const Point & pt1, const Point & pt2, bool isFill) :
+	Shape(Color(), pt1, pt2, isFill, typeCircle)
 {}
 
 //半径利用两点之间的距离计算
@@ -135,6 +149,10 @@ Rectangle_::Rectangle_(const Rectangle_ & rhs) :
 		typeRectangle)
 {}
 
+Rectangle_::Rectangle_(const Point & pt1, const Point & pt2, bool isFill) :
+	Shape(Color(), pt1, pt2, isFill, typeRectangle)
+{}
+
 void Rectangle_::drawShape()
 {
 	color.setGraphColor();
@@ -158,8 +176,9 @@ std::ostream& operator<<(std::ostream& os, Shape& shape)
 
 std::istream& operator>>(std::istream& is, Shape& shape)
 {
-	is >> shape.type >> shape.isFill >> shape.color
-		>> shape.pt1 >> shape.pt2;
+	//is >> shape.type >> shape.isFill >> shape.color
+	//	>> shape.pt1 >> shape.pt2;
+	inputShape(is, shape);
 	return is;
 }
 
@@ -175,8 +194,9 @@ std::ostream& operator<<(std::ostream& os, Line& line)
 
 std::istream& operator>>(std::istream& is, Line& line)
 {
-	is >> line.type >> line.isFill >> line.color
-		>> line.pt1 >> line.pt2;
+	/*is >> line.type >> line.isFill >> line.color
+		>> line.pt1 >> line.pt2;*/
+	inputShape(is, line);
 	return is;
 }
 
@@ -192,8 +212,9 @@ std::ostream& operator<<(std::ostream& os, Circle& circle)
 
 std::istream& operator>>(std::istream& is, Circle& circle)
 {
-	is >> circle.type >> circle.isFill >> circle.color
-		>> circle.pt1 >> circle.pt2;
+	/*is >> circle.type >> circle.isFill >> circle.color
+		>> circle.pt1 >> circle.pt2;*/
+	inputShape(is, circle);
 	return is;
 }
 
@@ -209,40 +230,17 @@ std::ostream& operator<<(std::ostream& os, Rectangle_& rectangle)
 
 std::istream& operator>>(std::istream& is, Rectangle_& rectangle)
 {
-	is >> rectangle.type >> rectangle.isFill >> rectangle.color
-		>> rectangle.pt1 >> rectangle.pt2;
+	/*is >> rectangle.type >> rectangle.isFill >> rectangle.color
+		>> rectangle.pt1 >> rectangle.pt2;*/
+	inputShape(is, rectangle);
 	return is;
 }
 
-void drawAShape(Shape& shape, bool isFill_)
+void drawAShape(Shape& shape)
 {
-	mouse_msg msg1, msg2;
-	shape.setIsFill(isFill_);
 	shape.setColor(Color(EGEGET_R(getcolor()),
 		EGEGET_G(getcolor()),
 		EGEGET_B(getcolor())));
-	while (true)
-	{
-		msg1 = getmouse();
-		if (msg1.is_left() && msg1.is_down())
-		{
-			shape.setPt1(msg1.x - 500, msg1.y - 20); //坐标换算
-			if (shape.getPt1() > Point(0, 0))
-				break;
-			xyprintf(0, 510, "选点必须在可画区域内！");
-		}
-	}
-	while (true)
-	{
-		msg2 = getmouse();
-		if (msg2.is_left() && msg2.is_down())
-		{
-			shape.setPt2(msg2.x - 500, msg2.y - 20); //坐标换算
-			if (shape.getPt2() > Point(0, 0))
-				break;
-			xyprintf(0, 510, "选点必须在可画区域内！");
-		}
-	}
 	shape.drawShape();
 	Shape::shapes.push_back(&shape);
 }
@@ -262,6 +260,11 @@ void clearShapes()
 		delete *it;
 	}
 	Shape::shapes.clear();
+}
+
+void inputShape(std::istream& is, Shape& shape)
+{
+	
 }
 
 Triangle::Triangle() :

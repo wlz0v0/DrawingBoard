@@ -2,7 +2,7 @@
 #include "color.h"
 
 //这个数组存放的是各种颜色的RGB值，便于后面打印
-const std::array<Color, 17> colorset = {
+const std::array<Color, 17> Color::colorset = {
 	       Color(255, 0, 0),      //红色
 		   Color(255, 97, 0),     //橙色
 		   Color(255, 255, 0),    //黄色

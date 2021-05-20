@@ -42,6 +42,9 @@
     <ClCompile Include="drawingBoard.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="canvas.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shape.h">
@@ -66,6 +69,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="drawingBoard.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="canvas.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

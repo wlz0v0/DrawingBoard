@@ -1,5 +1,6 @@
 #include "shapeButton.h"
 #include "operationButton.h"
+#include "canvas.h"
 
 ShapeButton::ShapeButton(const Point& pt1_, const Point& pt2_, bool isFill_) :
 	ButtonBase(pt1_, pt2_),
@@ -7,8 +8,7 @@ ShapeButton::ShapeButton(const Point& pt1_, const Point& pt2_, bool isFill_) :
 {}
 
 LineButton::LineButton(const Point& pt1_, const Point& pt2_) :
-	ShapeButton(pt1_, pt2_, false),
-	aLine(nullptr)
+	ShapeButton(pt1_, pt2_, false)
 {}
 
 void LineButton::init()
@@ -22,13 +22,14 @@ void LineButton::init()
 void LineButton::operation()
 {
 	clearBuffer();
-	aLine = new Line;
-	drawAShape(*aLine, false);
+	Canvas::setTypeDrawed(1);
+	xyprintf(380, 110, "         ");
+	xyprintf(380, 110, "Ö±Ïß");
 }
 
 CircleButton::CircleButton(const Point& pt1_, const Point& pt2_, bool isFill_) :
 	ShapeButton(pt1_, pt2_, isFill_),
-	aCircle(nullptr)
+	isFill(isFill_)
 {}
 
 void CircleButton::init()
@@ -58,13 +59,23 @@ void CircleButton::init()
 void CircleButton::operation()
 {
 	clearBuffer();
-	aCircle = new Circle;
-	drawAShape(*aCircle, isFill);
+	if (isFill)
+	{
+		Canvas::setTypeDrawed(5);
+		xyprintf(380, 110, "         ");
+		xyprintf(380, 110, "Ìî³äÔ²");
+	}
+	else
+	{
+		Canvas::setTypeDrawed(4);
+		xyprintf(380, 110, "         ");
+		xyprintf(380, 110, "¿ÕÐÄÔ²");
+	}
 }
 
 RectangleButton::RectangleButton(const Point& pt1_, const Point& pt2_, bool isFill_) :
 	ShapeButton(pt1_, pt2_, isFill_),
-	aRectangle(nullptr)
+	isFill(isFill_)
 {}
 
 void RectangleButton::init()
@@ -84,6 +95,16 @@ void RectangleButton::init()
 void RectangleButton::operation()
 {
 	clearBuffer();
-	aRectangle = new Rectangle_;
-	drawAShape(*aRectangle, isFill);
+	if (isFill)
+	{
+		Canvas::setTypeDrawed(3);
+		xyprintf(380, 110, "         ");
+		xyprintf(380, 110, "Ìî³ä¾ØÐÎ");
+	}
+	else
+	{
+		Canvas::setTypeDrawed(2);
+		xyprintf(380, 110, "         ");
+		xyprintf(380, 110, "¿ÕÐÄ¾ØÐÎ");
+	}
 }

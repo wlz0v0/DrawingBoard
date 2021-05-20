@@ -7,6 +7,7 @@
 #include "colorButton.h"
 #include "shapeButton.h"
 #include "operationButton.h"
+#include "canvas.h"
 
 // 画板类，用于实现画板
 // 字段包含画板中需要的各种按钮以及储存按钮的向量
@@ -41,6 +42,7 @@ private:
 	RestoreButton restoreButton;
 	ReadButton readButton;
 	WriteButton writeButton;
+	Canvas canvas;
 	static std::vector<ButtonBase*> buttons;
 
 public:

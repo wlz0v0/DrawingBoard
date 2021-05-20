@@ -3,34 +3,17 @@
 #include <iterator>
 #include <fstream>
 #include <exception>
+#include <string>
+#include <stdexcept>
 #include "operationButton.h"
 
-extern bool isExit;
+//extern bool isExit;
 std::vector<Shape*> OperationButton::buffer;
-std::filesystem::path filePath("file.txt");
-
-void checkInputShape(Shape& shape)
-{
-	Color colorOfShape = shape.getColor();
-	if (colorOfShape.red < 0 && colorOfShape.red > 255)
-	{
-		colorOfShape.red = 255;
-		shape.setColor(colorOfShape);
-		throw std::exception("红色值异常，已改为255");
-	}
-	if (colorOfShape.green < 0 && colorOfShape.green > 255)
-	{
-		colorOfShape.green = 255;
-		shape.setColor(colorOfShape);
-		throw std::exception("绿色值异常，已改为255");
-	}
-	if (colorOfShape.blue < 0 && colorOfShape.blue > 255)
-	{
-		colorOfShape.blue = 255;
-		shape.setColor(colorOfShape);
-		throw std::exception("蓝色值异常，已改为255");
-	}
-}
+const std::filesystem::path filePath("file.txt");
+const std::regex typePattern("(\\d)");
+const std::regex isFillPattern("(0|1)");
+const std::regex colorPattern("(\\d{0,3}) (\\d{0,3}) (\\d{0,3})");
+const std::regex pointPattern("(\\d{0,3}) (\\d{0,3})");
 
 OperationButton::OperationButton(const Point& pt1_, const Point& pt2_) :
 	ButtonBase(pt1_, pt2_)
@@ -51,7 +34,7 @@ void ClearButton::init()
 void ClearButton::operation()
 {
 	clearPainting(); // 清除图画内容
-	Shape::shapes.clear(); // 清除保存数据
+	clearShapes();   // 清除保存数据
 }
 
 ExitButton::ExitButton(const Point& pt1_, const Point& pt2_) :
@@ -68,7 +51,10 @@ void ExitButton::init()
 
 void ExitButton::operation()
 {
-	isExit = true;
+	clearBuffer(); // 清空缓冲区
+	clearShapes(); // 清空形状
+	closegraph();  // 退出画板
+	exit(0);
 }
 
 CancelButton::CancelButton(const Point& pt1_, const Point& pt2_) :
@@ -87,7 +73,7 @@ void CancelButton::operation()
 {
 	if (Shape::shapes.empty())
 		return;
-	OperationButton::buffer.push_back(*(Shape::shapes.end() - 1));
+	OperationButton::buffer.push_back(Shape::shapes.back());
 	Shape::shapes.pop_back();
 	clearPainting();
 	drawShapes();
@@ -109,7 +95,7 @@ void RestoreButton::operation()
 {
 	if (OperationButton::buffer.empty())
 		return;
-	Shape::shapes.push_back(*(buffer.end() - 1));
+	Shape::shapes.push_back(buffer.back());
 	OperationButton::buffer.pop_back();
 	clearPainting();
 	drawShapes();
@@ -123,50 +109,18 @@ void WriteButton::init()
 {
 	setfont(40, 0, "楷体");
 	setcolor(BLACK);
-	xyprintf(pt1.x, pt1.y, "读取");
+	xyprintf(pt1.x, pt1.y, "保存");
 	rectangle(pt1.x, pt1.y, pt2.x, pt2.y);
 }
 
 void WriteButton::operation()
 {
-	std::ifstream ifs(filePath);
-	int type;
-	Line* aLine;
-	Circle* aCircle;
-	Rectangle_* aRectangle;
-	while (!ifs.eof())
+	std::ofstream ofs(filePath);
+	for (auto it = Shape::shapes.begin(); it != Shape::shapes.end(); it++)
 	{
-		try
-		{
-			ifs >> type;
-			switch (type)
-			{
-			case typeLine:
-				aLine = new Line;
-				ifs >> *aLine;
-				checkInputShape(*aLine);
-				Shape::shapes.push_back(aLine);
-				break;
-			case typeCircle:
-				aCircle = new Circle;
-				ifs >> *aCircle;
-				checkInputShape(*aCircle);
-				Shape::shapes.push_back(aCircle);
-				break;
-			case typeRectangle:
-				aRectangle = new Rectangle_;
-				ifs >> *aRectangle;
-				checkInputShape(*aRectangle);
-				Shape::shapes.push_back(aRectangle);
-				break;
-			}
-		}
-		catch (std::exception& colorError)
-		{
-			xyprintf(0, 510, colorError.what());
-		}
+		ofs << (*it)->getType() << std::endl
+			<< **it;
 	}
-	drawShapes();
 }
 
 ReadButton::ReadButton(const Point& pt1_, const Point& pt2_) :
@@ -177,18 +131,98 @@ void ReadButton::init()
 {
 	setfont(40, 0, "楷体");
 	setcolor(BLACK);
-	xyprintf(pt1.x, pt1.y, "保存");
+	xyprintf(pt1.x, pt1.y, "读取");
 	rectangle(pt1.x, pt1.y, pt2.x, pt2.y);
 }
 
 void ReadButton::operation()
 {
-	std::ofstream ofs(filePath);
-	for (auto it = Shape::shapes.begin(); it != Shape::shapes.end(); it++)
+	std::ifstream ifs(filePath);
+	int type;
+	std::string str;
+	std::smatch s;
+	Line* aLine;
+	Circle* aCircle;
+	Rectangle_* aRectangle;
+	clearPainting(); // 清除图画内容
+	clearShapes();   // 清除保存数据
+	while (!ifs.eof())
 	{
-		ofs << (*it)->getType() << std::endl
-			<< **it << std::endl;
+		try
+		{
+			std::getline(ifs, str); // type
+			if (std::regex_match(str, s, typePattern))
+				type = std::stoi(s[0]);
+			else if (str.empty())
+				break;
+			else
+				throw std::runtime_error("Error type!");
+			switch (type)
+			{
+			case typeLine:
+				aLine = new Line;
+				readShape(ifs, *aLine, s, str);
+				//checkInputShape(*aLine);
+				Shape::shapes.push_back(aLine);
+				break;
+			case typeCircle:
+				aCircle = new Circle;
+				readShape(ifs, *aCircle, s, str);
+				//checkInputShape(*aCircle);
+				Shape::shapes.push_back(aCircle);
+				break;
+			case typeRectangle:
+				aRectangle = new Rectangle_;
+				readShape(ifs, *aRectangle, s, str);
+				//checkInputShape(*aRectangle);
+				Shape::shapes.push_back(aRectangle);
+				break;
+			}
+		}
+		catch (std::runtime_error& error)
+		{
+			xyprintf(0, 510, "          ");
+			xyprintf(0, 510, error.what());
+		}
 	}
+	drawShapes();
+}
+
+void ReadButton::readShape(std::ifstream& ifs, Shape& shape, std::smatch& s, std::string& str)
+{
+	std::getline(ifs, str); // type
+	if (str.empty())
+		return;
+	if (std::regex_match(str, s, typePattern))
+		shape.setType(std::stoi(s[0]));
+	else
+		throw std::runtime_error("Error type!");
+	std::getline(ifs, str); // isFill
+	if (std::regex_match(str, s, isFillPattern))
+		shape.setIsFill(std::stoi(s[0]));
+	else
+		throw std::runtime_error("Error isFill!");
+	std::getline(ifs, str); // color
+	if (std::regex_match(str, s, colorPattern))
+		shape.setColor(
+			Color(
+				std::stoi(s[1]),
+				std::stoi(s[2]),
+				std::stoi(s[3])));
+	else
+		throw std::runtime_error("Error color!");
+	std::getline(ifs, str);
+	if (std::regex_match(str, s, pointPattern))
+	{
+		shape.setPt1(std::stoi(s[1]), std::stoi(s[2]));
+	}
+	else
+		throw std::runtime_error("Error point!");
+	std::getline(ifs, str);
+	if (std::regex_match(str, s, pointPattern))
+		shape.setPt2(std::stoi(s[1]), std::stoi(s[2]));
+	else
+		throw std::runtime_error("Error point!");
 }
 
 

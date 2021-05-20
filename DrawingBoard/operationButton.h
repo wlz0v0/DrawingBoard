@@ -5,6 +5,7 @@
 
 #include "buttonBase.h"
 #include "shape.h"
+#include <regex>
 
 // 使用预处理指令判断C++编译器版本是否在C++17及以后，若不是则报错并提醒
 #if _MSVC_LANG >= 201703L || __cplusplus >= 201703L // MSVC or clang and gcc
@@ -20,6 +21,7 @@
 class OperationButton : public ButtonBase
 {
 public:
+	// 缓冲区，用于存储被撤销掉的图形
 	static std::vector<Shape*> buffer;
 
 	OperationButton(const Point& pt1_, const Point& pt2_);
@@ -80,6 +82,7 @@ public:
 	ReadButton(const Point& pt1_, const Point& pt2_);
 	virtual void init();
 	virtual void operation();
+	void readShape(std::ifstream& ifs, Shape& shape, std::smatch& s, std::string& str);
 };
 
 // 写入按钮

@@ -31,11 +31,12 @@ protected:
 public:
 	static std::vector<Shape*> shapes;
 
-	Shape(int type_);
+	explicit Shape(int type_);
 	Shape(const Color& color_, const Point& pt1_, const Point& pt2_,
 		bool isFill, int type);
 	virtual ~Shape() = default;
 
+	void setType(int type_);
 	void setColor(const Color& color_);
 	void setIsFill(bool isFill_);
 	void setPt1(int x_, int y_);
@@ -62,6 +63,7 @@ class Line : public Shape
 public:
 	Line();
 	Line(const Line& rhs);
+	Line(const Point& pt1, const Point& pt2);
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Line& line);
 	friend std::istream& operator>>(std::istream& is, Line& line);
@@ -76,6 +78,7 @@ class Circle : public Shape
 public:
 	Circle();
 	Circle(const Circle& rhs);
+	Circle(const Point& pt1, const Point& pt2, bool isFill);
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Circle& circle);
 	friend std::istream& operator>>(std::istream& is, Circle& circle);
@@ -92,6 +95,7 @@ class Rectangle_ : public Shape
 public:
 	Rectangle_();
 	Rectangle_(const Rectangle_& rhs);
+	Rectangle_(const Point& pt1, const Point& pt2, bool isFill);
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Rectangle_& rectangle);
 	friend std::istream& operator>>(std::istream& is, Rectangle_& rectangle);
@@ -114,8 +118,9 @@ public:
 };
 
 // 非成员函数
-void drawAShape(Shape& shape, bool isFill_); // 利用多态画出一个形状
+void drawAShape(Shape& shape); // 利用多态画出一个形状
 void drawShapes(); // 把shapes中储存的数据画出来
 void clearShapes(); // 清空shapes
+void inputShape(std::istream& is, Shape& shape);
 
 #endif // SHAPE_H

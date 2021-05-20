@@ -24,9 +24,6 @@ public:
 // 直线无填充，isFill默认为false
 class LineButton final : public ShapeButton
 {
-private:
-	Line* aLine;
-
 public:
 	LineButton(const Point& pt1_, const Point& pt2_);
 	virtual void init();
@@ -40,7 +37,7 @@ public:
 class CircleButton final : public ShapeButton
 {
 private:
-	Circle* aCircle;
+	bool isFill;
 
 public:
 	CircleButton(const Point& pt1_, const Point& pt2_, bool isFill_);
@@ -55,7 +52,7 @@ public:
 class RectangleButton final : public ShapeButton
 {
 private:
-	Rectangle_* aRectangle;
+	bool isFill;
 
 public:
 	RectangleButton(const Point& pt1_, const Point& pt2_, bool isFill_);
