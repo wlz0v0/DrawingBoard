@@ -1,5 +1,6 @@
-#include <graphics.h>
 #include "point.h"
+#include <graphics.h>
+#include <stdexcept>
 
 Point::Point() :
 	x(0),
@@ -16,11 +17,43 @@ Point::Point(const Point & rhs) :
 	y(rhs.y)
 {}
 
-bool Point::operator>(const Point& rhs)
+bool Point::operator>(const Point& rhs) const
 {
 	if (x > rhs.x && y > rhs.y)
 		return true;
 	return false;
+}
+
+Point Point::operator+(const Point& rhs)
+{
+	Point ret;
+	ret.x = (x + rhs.x) / 2;
+	ret.y = (y + rhs.y) / 2;
+	return ret;
+}
+
+bool Point::operator==(const Point& rhs) const
+{
+	if (x == rhs.x && y == rhs.y)
+		return true;
+	return false;
+}
+
+bool Point::operator!=(const Point& rhs) const
+{
+	if (x == rhs.x && y == rhs.y)
+		return false;
+	return true;
+}
+
+int& Point::operator[](size_t index)
+{
+	if (index == 0)
+		return x;
+	else if (index == 1)
+		return y;
+	else
+		throw std::out_of_range("Error index");
 }
 
 std::ostream& operator<<(std::ostream& os, Point& pt)

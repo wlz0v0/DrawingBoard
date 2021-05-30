@@ -10,7 +10,8 @@
 //extern bool isExit;
 std::vector<Shape*> OperationButton::buffer;
 const std::filesystem::path filePath("file.txt");
-const std::regex typePattern("(\\d)");
+// getline函数读取后利用正则表达式判断读取格式是否正确
+const std::regex typePattern("(1|2|3)");
 const std::regex isFillPattern("(0|1)");
 const std::regex colorPattern("(\\d{0,3}) (\\d{0,3}) (\\d{0,3})");
 const std::regex pointPattern("(\\d{0,3}) (\\d{0,3})");
@@ -73,8 +74,8 @@ void CancelButton::operation()
 {
 	if (Shape::shapes.empty())
 		return;
-	OperationButton::buffer.push_back(Shape::shapes.back());
-	Shape::shapes.pop_back();
+	OperationButton::buffer.push_back(Shape::shapes.back()); // shapes尾部元素压入buffer
+	Shape::shapes.pop_back(); // shapes尾部元素弹出
 	clearPainting();
 	drawShapes();
 }
@@ -87,7 +88,7 @@ void RestoreButton::init()
 {
 	setfont(40, 0, "楷体");
 	setcolor(BLACK);
-	xyprintf(pt1.x, pt1.y, "->");//撤销键
+	xyprintf(pt1.x, pt1.y, "->"); // 撤销键
 	rectangle(pt1.x, pt1.y, pt2.x, pt2.y);
 }
 
@@ -95,8 +96,8 @@ void RestoreButton::operation()
 {
 	if (OperationButton::buffer.empty())
 		return;
-	Shape::shapes.push_back(buffer.back());
-	OperationButton::buffer.pop_back();
+	Shape::shapes.push_back(buffer.back()); // buffer尾部元素压入shapes
+	OperationButton::buffer.pop_back(); // buffer尾部元素弹出
 	clearPainting();
 	drawShapes();
 }
@@ -243,7 +244,7 @@ void clearBuffer()
 	//清空缓冲区
 	if (!OperationButton::buffer.empty())
 	{
-		for (auto it = OperationButton::buffer.begin(); it != OperationButton::buffer.end(); it++)
+		for (auto it = OperationButton::buffer.begin(); it != OperationButton::buffer.end(); ++it)
 			delete* it;
 		OperationButton::buffer.clear();
 	}

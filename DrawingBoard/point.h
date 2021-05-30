@@ -18,7 +18,11 @@ public:
 	Point(const Point& rhs);
 	friend std::ostream& operator<<(std::ostream& os, Point& pt);
 	friend std::istream& operator>>(std::istream& is, Point& pt);
-	bool operator>(const Point& pt_);
+	bool operator>(const Point& pt_) const;
+	Point operator+(const Point& rhs);
+	bool operator==(const Point& rhs) const;
+	bool operator!=(const Point& rhs) const;
+	int& operator[](size_t index);
 };
 
 #endif //POINT_H

@@ -10,12 +10,12 @@
 // 字段中的颜色代表着按钮实例对应的颜色
 class ColorButton final : public ButtonBase
 {
-private:
-	Color buttonColor;
 public:
 	ColorButton(const Point& pt1_, const Point& pt2_, const Color& color);
 	virtual void init();
 	virtual void operation();
+private:
+	Color buttonColor; // 颜色按钮的颜色
 };
 
 #endif // COLOR_BUTTON_H

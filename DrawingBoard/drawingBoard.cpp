@@ -123,6 +123,7 @@ void DrawingBoard::chooseOperations()
 		choice = getmouse();
 		if (choice.is_down() && choice.is_left())
 		{
+			// 利用find_if函数和lambda表达式判断按钮是否被点击
 			auto it = std::find_if(buttons.begin(),
 				buttons.end(),
 				[&choice](ButtonBase* aButton) { return aButton->isClicked(choice); });

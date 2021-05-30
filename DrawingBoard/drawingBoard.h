@@ -13,6 +13,12 @@
 // 字段包含画板中需要的各种按钮以及储存按钮的向量
 class DrawingBoard // controller class
 {
+public:
+	DrawingBoard();
+	void initialize();
+	void chooseOperations();
+	void exit(); // 退出函数，delete掉new出的图形
+
 private:
 	ColorButton redButton;
 	ColorButton orangeButton;
@@ -43,13 +49,7 @@ private:
 	ReadButton readButton;
 	WriteButton writeButton;
 	Canvas canvas;
-	static std::vector<ButtonBase*> buttons;
-
-public:
-	DrawingBoard();
-	void initialize();
-	void chooseOperations();
-	void exit();
+	static std::vector<ButtonBase*> buttons; // 存放按钮的数组，便于访问
 };
 
 #endif // DRAWING_BOARD_H

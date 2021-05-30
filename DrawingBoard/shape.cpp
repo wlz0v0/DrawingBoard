@@ -4,6 +4,7 @@
 #include <cmath>
 #include <iterator>
 #include <fstream>
+#include <stdexcept>
 
 using std::endl;
 std::vector<Shape*> Shape::shapes;
@@ -55,22 +56,22 @@ void Shape::setPt2(int x_, int y_)
 	pt2.y = y_;
 }
 
-Color Shape::getColor()
+Color Shape::getColor() const
 {
 	return color;
 }
 
-int Shape::getType()
+int Shape::getType() const
 {
 	return type;
 }
 
-Point Shape::getPt1()
+Point Shape::getPt1() const
 {
 	return pt1;
 }
 
-Point Shape::getPt2()
+Point Shape::getPt2() const
 {
 	return pt2;
 }
@@ -104,6 +105,78 @@ void Line::drawShape()
 	setviewport(0, 0, 1440, 720);
 }
 
+bool Line::operator<(const Line& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) <
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+bool Line::operator<=(const Line& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) <=
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+bool Line::operator>(const Line& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) > 
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+bool Line::operator>=(const Line& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) >=
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+bool Line::operator==(const Line& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) ==
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+bool Line::operator!=(const Line& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) !=
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+Line& Line::operator=(const Line& rhs) 
+{
+	color = rhs.color;
+	isFill = rhs.isFill;
+	type = rhs.type;
+	pt1 = rhs.pt1;
+	pt2 = rhs.pt2;
+	return *this;
+	///*deep copy
+	//下面所有拷贝得到的变量都应该是指针类型*/
+	//if (*this != rhs)
+	//{
+	//	delete color;
+	//	delete isFill;
+	//	delete type;
+	//	delete pt1;
+	//	delete pt2;
+	//	color = new Color(rhs.color);
+	//	isFill = new bool(rhs.isFill);
+	//	type = new int(rhs.type);
+	//	pt1 = new Point(rhs.pt1);
+	//	pt2 = new Point(rhs.pt2);
+	//}
+	//return *this;
+}
+
+Point& Line::operator[](int index)
+{
+	if (index == 0)
+		return pt1;
+	else if (index == 1)
+		return pt2;
+	else
+		throw std::out_of_range("Error index");
+}
+
 Circle::Circle() :
 	Shape(typeCircle)
 {}
@@ -126,7 +199,7 @@ void Circle::drawShape()
 	int radius = static_cast<int>(
 		sqrt
 		(pow(pt2.x - pt1.x, 2) +
-		pow(pt2.y - pt1.y, 2))
+			pow(pt2.y - pt1.y, 2))
 		);
 	color.setGraphColor();
 	setviewport(500, 20, 1440, 720);
@@ -135,6 +208,78 @@ void Circle::drawShape()
 	else
 		circle(pt1.x, pt1.y, radius);
 	setviewport(0, 0, 1440, 720);
+}
+
+bool Circle::operator<(const Circle& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) <
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+bool Circle::operator<=(const Circle& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) <=
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+bool Circle::operator>(const Circle& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) >
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+bool Circle::operator>=(const Circle& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) >=
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+ 
+bool Circle::operator==(const Circle& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) ==
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+bool Circle::operator!=(const Circle& rhs) const
+{
+	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) !=
+		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+}
+
+Circle& Circle::operator=(const Circle& rhs)
+{
+	color = rhs.color;
+	isFill = rhs.isFill;
+	type = rhs.type;
+	pt1 = rhs.pt1;
+	pt2 = rhs.pt2;
+	return *this;
+	///*deep copy
+	//下面所有拷贝得到的变量都应该是指针类型*/
+	//if (*this != rhs)
+	//{
+	//	delete color;
+	//	delete isFill;
+	//	delete type;
+	//	delete pt1;
+	//	delete pt2;
+	//	color = new Color(rhs.color);
+	//	isFill = new bool(rhs.isFill);
+	//	type = new int(rhs.type);
+	//	pt1 = new Point(rhs.pt1);
+	//	pt2 = new Point(rhs.pt2);
+	//}
+	//return *this;
+}
+
+Point& Circle::operator[](int index)
+{
+	if (index == 0)
+		return pt1;
+	else if (index == 1)
+		return pt2;
+	else
+		throw std::out_of_range("Error index");
 }
 
 Rectangle_::Rectangle_() :
@@ -164,6 +309,78 @@ void Rectangle_::drawShape()
 	setviewport(0, 0, 1440, 720);
 }
 
+bool Rectangle_::operator<(const Rectangle_& rhs) const
+{
+	return abs(pt2.x - pt1.x) + abs(pt2.y - pt1.y) <
+		abs(rhs.pt2.x - rhs.pt1.x) + abs(rhs.pt2.y - rhs.pt1.y);
+}
+
+bool Rectangle_::operator<=(const Rectangle_& rhs) const
+{
+	return abs(pt2.x - pt1.x) + abs(pt2.y - pt1.y) <=
+		abs(rhs.pt2.x - rhs.pt1.x) + abs(rhs.pt2.y - rhs.pt1.y);
+}
+
+bool Rectangle_::operator>(const Rectangle_& rhs) const
+{
+	return abs(pt2.x - pt1.x) + abs(pt2.y - pt1.y) >
+		abs(rhs.pt2.x - rhs.pt1.x) + abs(rhs.pt2.y - rhs.pt1.y);
+}
+
+bool Rectangle_::operator>=(const Rectangle_& rhs) const
+{
+	return abs(pt2.x - pt1.x) + abs(pt2.y - pt1.y) >=
+		abs(rhs.pt2.x - rhs.pt1.x) + abs(rhs.pt2.y - rhs.pt1.y);
+}
+
+bool Rectangle_::operator==(const Rectangle_& rhs) const
+{
+	return abs(pt2.x - pt1.x) + abs(pt2.y - pt1.y) ==
+		abs(rhs.pt2.x - rhs.pt1.x) + abs(rhs.pt2.y - rhs.pt1.y);
+}
+
+bool Rectangle_::operator!=(const Rectangle_& rhs) const
+{
+	return abs(pt2.x - pt1.x) + abs(pt2.y - pt1.y) !=
+		abs(rhs.pt2.x - rhs.pt1.x) + abs(rhs.pt2.y - rhs.pt1.y);
+}
+
+Rectangle_& Rectangle_::operator=(const Rectangle_& rhs)
+{
+	color = rhs.color;
+	isFill = rhs.isFill;
+	type = rhs.type;
+	pt1 = rhs.pt1;
+	pt2 = rhs.pt2;
+	return *this;
+	///*deep copy
+	//下面所有拷贝得到的变量都应该是指针类型*/
+	//if (*this != rhs)
+	//{
+	//	delete color;
+	//	delete isFill;
+	//	delete type;
+	//	delete pt1;
+	//	delete pt2;
+	//	color = new Color(rhs.color);
+	//	isFill = new bool(rhs.isFill);
+	//	type = new int(rhs.type);
+	//	pt1 = new Point(rhs.pt1);
+	//	pt2 = new Point(rhs.pt2);
+	//}
+	//return *this;
+}
+
+Point& Rectangle_::operator[](int index)
+{
+	if (index == 0)
+		return pt1;
+	else if (index == 1)
+		return pt2;
+	else
+		throw std::out_of_range("Error index");
+}
+
 std::ostream& operator<<(std::ostream& os, Shape& shape)
 {
 	os << shape.type << endl
@@ -176,9 +393,8 @@ std::ostream& operator<<(std::ostream& os, Shape& shape)
 
 std::istream& operator>>(std::istream& is, Shape& shape)
 {
-	//is >> shape.type >> shape.isFill >> shape.color
-	//	>> shape.pt1 >> shape.pt2;
-	inputShape(is, shape);
+	is >> shape.type >> shape.isFill >> shape.color
+		>> shape.pt1 >> shape.pt2;
 	return is;
 }
 
@@ -196,7 +412,6 @@ std::istream& operator>>(std::istream& is, Line& line)
 {
 	/*is >> line.type >> line.isFill >> line.color
 		>> line.pt1 >> line.pt2;*/
-	inputShape(is, line);
 	return is;
 }
 
@@ -212,9 +427,8 @@ std::ostream& operator<<(std::ostream& os, Circle& circle)
 
 std::istream& operator>>(std::istream& is, Circle& circle)
 {
-	/*is >> circle.type >> circle.isFill >> circle.color
-		>> circle.pt1 >> circle.pt2;*/
-	inputShape(is, circle);
+	is >> circle.type >> circle.isFill >> circle.color
+		>> circle.pt1 >> circle.pt2;
 	return is;
 }
 
@@ -230,9 +444,8 @@ std::ostream& operator<<(std::ostream& os, Rectangle_& rectangle)
 
 std::istream& operator>>(std::istream& is, Rectangle_& rectangle)
 {
-	/*is >> rectangle.type >> rectangle.isFill >> rectangle.color
-		>> rectangle.pt1 >> rectangle.pt2;*/
-	inputShape(is, rectangle);
+	is >> rectangle.type >> rectangle.isFill >> rectangle.color
+		>> rectangle.pt1 >> rectangle.pt2;
 	return is;
 }
 
@@ -247,7 +460,7 @@ void drawAShape(Shape& shape)
 
 void drawShapes()
 {
-	for (auto it = Shape::shapes.begin(); it != Shape::shapes.end(); it++)
+	for (auto it = Shape::shapes.begin(); it != Shape::shapes.end(); ++it)
 	{
 		(*it)->drawShape();
 	}
@@ -255,16 +468,11 @@ void drawShapes()
 
 void clearShapes()
 {
-	for (auto it = Shape::shapes.begin(); it != Shape::shapes.end(); it++)
+	for (auto it = Shape::shapes.begin(); it != Shape::shapes.end(); ++it)
 	{
 		delete *it;
 	}
 	Shape::shapes.clear();
-}
-
-void inputShape(std::istream& is, Shape& shape)
-{
-	
 }
 
 Triangle::Triangle() :

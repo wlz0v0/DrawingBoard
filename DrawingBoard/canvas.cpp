@@ -11,7 +11,7 @@ Canvas::Canvas() :
 	aRectangle(nullptr)
 {}
 
-bool Canvas::isClicked(const mouse_msg & msg)
+bool Canvas::isClicked(const mouse_msg & msg) const
 {
 	if ((msg.x >= 500 && msg.x <= 1440) && (msg.y >= 20 && msg.y <= 720))
 		return true;
@@ -26,11 +26,11 @@ void Canvas::operation(const mouse_msg& msg)
 		pt1.x = msg.x - 500;
 		pt1.y = msg.y - 20;
 	}
-	else
+	else // pointCount为偶数时进行画图操作
 	{
 		pt2.x = msg.x - 500;
 		pt2.y = msg.y - 20;
-		switch (typeDrawed)
+		switch (typeDrawed) // 根据当前选择的图形类型画图
 		{
 		case lineButton:
 			aLine = new Line(pt1, pt2);

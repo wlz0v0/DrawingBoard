@@ -21,8 +21,8 @@ public:
 	virtual ~ButtonBase();
 	
 	bool isClicked(const mouse_msg& msg);
-	virtual void init() = 0;
-	virtual void operation() = 0;
+	virtual void init() = 0; // 按钮图样初始化
+	virtual void operation() = 0; // 按钮对应操作
 };
 
 #endif // BUTTON_BASE_H

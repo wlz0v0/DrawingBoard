@@ -21,8 +21,7 @@
 class OperationButton : public ButtonBase
 {
 public:
-	// 缓冲区，用于存储被撤销掉的图形
-	static std::vector<Shape*> buffer;
+	static std::vector<Shape*> buffer; // 缓冲区，用于存储被撤销掉的图形
 
 	OperationButton(const Point& pt1_, const Point& pt2_);
 	virtual void init() = 0;

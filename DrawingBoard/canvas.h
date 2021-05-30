@@ -17,12 +17,13 @@ class Canvas
 {
 public:
 	Canvas();
-	bool isClicked(const mouse_msg& msg);
+	bool isClicked(const mouse_msg& msg) const;
 	void operation(const mouse_msg& msg);
 	static void setTypeDrawed(int typeDrawed_);
+
 private:
-	static int typeDrawed;
-	int pointCount;
+	static int typeDrawed;  // 所画图形的类型
+	int pointCount; // 记录画板上选取的点的个数，如果是偶数则画图
 	Point pt1, pt2;
 	Line* aLine;
 	Circle* aCircle;

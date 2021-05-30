@@ -1,5 +1,6 @@
-#include <graphics.h>
 #include "color.h"
+#include <graphics.h>
+#include <stdexcept>
 
 //这个数组存放的是各种颜色的RGB值，便于后面打印
 const std::array<Color, 17> Color::colorset = {
@@ -53,6 +54,68 @@ void Color::setGraphColor()
 {
 	setcolor(EGERGB(red, green, blue));
 	setfillcolor(EGERGB(red, green, blue));
+}
+
+bool Color::operator==(const Color& rhs) const
+{
+	if (red == rhs.red && green == rhs.green && blue == rhs.blue)
+		return true;
+	return false;
+}
+
+bool Color::operator!=(const Color& rhs) const
+{
+	if (red == rhs.red && green == rhs.green && blue == rhs.blue)
+		return false;
+	return true;
+}
+
+int& Color::operator[](int index)
+{
+	if (index == 0)
+		return red;
+	else if (index == 1)
+		return green;
+	else if (index == 2)
+		return blue;
+	else
+		throw std::out_of_range("Error index");
+}
+
+Color& Color::operator++()
+{
+	if (red < 255)
+		++red;
+	if (green < 255)
+		++green;
+	if (blue < 255)
+		++blue;
+	return *this;
+}
+
+Color Color::operator++(int)
+{
+	Color old = *this;
+	++(*this);
+	return old;
+}
+
+Color& Color::operator--()
+{
+	if (red > 0)
+		--red;
+	if (green > 0)
+		--green;
+	if (blue > 0)
+		--blue;
+	return *this;
+}
+
+Color Color::operator--(int)
+{
+	Color old = *this;
+	--(*this);
+	return old;
 }
 
 std::ostream& operator<<(std::ostream& os, Color& color)

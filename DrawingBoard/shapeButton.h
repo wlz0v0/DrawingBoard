@@ -10,12 +10,13 @@
 // 字段中含是否填充
 class ShapeButton : public ButtonBase
 {
-protected:
-	bool isFill;
 public:
 	ShapeButton(const Point& pt1_, const Point& pt2_, bool isFill_);
 	virtual void init() = 0;
 	virtual void operation() = 0;
+
+protected:
+	bool isFill;
 };
 
 // 直线图形按钮

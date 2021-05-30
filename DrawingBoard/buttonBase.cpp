@@ -10,6 +10,7 @@ ButtonBase::~ButtonBase(){}
 
 bool ButtonBase::isClicked(const mouse_msg & msg)
 {
+	// msg的范围在两点区域之间则有效
 	if ((msg.x >= pt1.x && msg.x <= pt2.x) && (msg.y >= pt1.y && msg.y <= pt2.y))
 		return true;
 	return false;

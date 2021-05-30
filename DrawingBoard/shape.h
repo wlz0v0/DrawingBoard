@@ -22,16 +22,10 @@ enum TypeName
 // 重载了流输入输出运算符
 class Shape
 {
-protected:
-	Color color;
-	bool isFill;
-	int type;
-	Point pt1, pt2;
-
 public:
 	static std::vector<Shape*> shapes;
 
-	explicit Shape(int type_);
+	explicit Shape(int type_); // 防止隐式类型转换
 	Shape(const Color& color_, const Point& pt1_, const Point& pt2_,
 		bool isFill, int type);
 	virtual ~Shape() = default;
@@ -42,16 +36,22 @@ public:
 	void setPt1(int x_, int y_);
 	void setPt2(int x_, int y_);
 
-	Color getColor();
-	int getType();
-	Point getPt1();
-	Point getPt2();
+	Color getColor() const;
+	int getType() const;
+	Point getPt1() const;
+	Point getPt2() const;
 	static size_t getShapeCount();
 
 	virtual void drawShape() = 0; // draw function
 
 	friend std::ostream& operator<<(std::ostream& os, Shape& shape);
 	friend std::istream& operator>>(std::istream& is, Shape& shape);
+
+protected:
+	Color color;
+	bool isFill;
+	int type;
+	Point pt1, pt2;
 };
 
 // 直线类
@@ -67,6 +67,14 @@ public:
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Line& line);
 	friend std::istream& operator>>(std::istream& is, Line& line);
+	bool operator<(const Line& rhs) const;
+	bool operator<=(const Line& rhs) const;
+	bool operator>(const Line& rhs) const;
+	bool operator>=(const Line& rhs) const;
+	bool operator==(const Line& rhs) const;
+	bool operator!=(const Line& rhs) const;
+	Line& operator=(const Line& rhs);
+	Point& operator[](int index);
 };
 
 // 圆类
@@ -82,6 +90,14 @@ public:
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Circle& circle);
 	friend std::istream& operator>>(std::istream& is, Circle& circle);
+	bool operator<(const Circle& rhs) const;
+	bool operator<=(const Circle& rhs) const;
+	bool operator>(const Circle& rhs) const;
+	bool operator>=(const Circle& rhs) const;
+	bool operator==(const Circle& rhs) const;
+	bool operator!=(const Circle& rhs) const;
+	Circle& operator=(const Circle& rhs);
+	Point& operator[](int index);
 };
 
 // 矩形类
@@ -99,6 +115,14 @@ public:
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Rectangle_& rectangle);
 	friend std::istream& operator>>(std::istream& is, Rectangle_& rectangle);
+	bool operator<(const Rectangle_& rhs) const;
+	bool operator<=(const Rectangle_& rhs) const;
+	bool operator>(const Rectangle_& rhs) const;
+	bool operator>=(const Rectangle_& rhs) const;
+	bool operator==(const Rectangle_& rhs) const;
+	bool operator!=(const Rectangle_& rhs) const;
+	Rectangle_& operator=(const Rectangle_& rhs);
+	Point& operator[](int index);
 };
 
 // 这个三角形类是为了作业，实际上的画板并没有画这个三角形的操作
@@ -121,6 +145,6 @@ public:
 void drawAShape(Shape& shape); // 利用多态画出一个形状
 void drawShapes(); // 把shapes中储存的数据画出来
 void clearShapes(); // 清空shapes
-void inputShape(std::istream& is, Shape& shape);
+
 
 #endif // SHAPE_H

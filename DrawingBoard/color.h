@@ -16,15 +16,22 @@ public:
 	int red;
 	int green;
 	int blue;
-	const static std::array<Color, 17> colorset;
+	const static std::array<Color, 17> colorset; // 预设的颜色
 
 	Color();
-	explicit Color(int red_, int green_, int blue_);
+	Color(int red_, int green_, int blue_);
 	Color& operator=(const Color& right);
 	~Color();
-	void setGraphColor();
+	void setGraphColor(); // 用Color的实例设置画图的颜色
 	friend std::ostream& operator<<(std::ostream& os, Color& color);
 	friend std::istream& operator>>(std::istream& is, Color& color);
+	bool operator==(const Color& rhs) const;
+	bool operator!=(const Color& rhs) const;
+	int& operator[](int index);
+	Color& operator++();
+	Color operator++(int);
+	Color& operator--();
+	Color operator--(int);
 };
 
 #endif // COLOR_H
