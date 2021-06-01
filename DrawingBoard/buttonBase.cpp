@@ -1,3 +1,10 @@
+/****************************************************************
+*																*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
 #include <graphics.h>
 #include "buttonBase.h"
 
@@ -10,8 +17,6 @@ ButtonBase::~ButtonBase(){}
 
 bool ButtonBase::isClicked(const mouse_msg & msg)
 {
-	// msg的范围在两点区域之间则有效
-	if ((msg.x >= pt1.x && msg.x <= pt2.x) && (msg.y >= pt1.y && msg.y <= pt2.y))
-		return true;
-	return false;
+	// 返回判断的结果
+	return (msg.x >= pt1.x && msg.x <= pt2.x) && (msg.y >= pt1.y && msg.y <= pt2.y);
 }

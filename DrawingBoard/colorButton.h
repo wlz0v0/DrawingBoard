@@ -1,6 +1,14 @@
+/****************************************************************
+*																*
+* 本头文件包含了颜色按钮类    										*
+* 颜色按钮执行的操作是设置颜色										*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *															*
+* lab 4                                                         *
+*                                                               *
+*****************************************************************/
+
 #ifndef COLOR_BUTTON_H
 #define COLOR_BUTTON_H
-// 本头文件中包含了颜色按钮类
 
 #include "buttonBase.h"
 #include "color.h"

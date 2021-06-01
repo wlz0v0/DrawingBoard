@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Shape">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+  <Class Name="Shape" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AMAEAAAAQAAAAAAAAAAAAAABAQABBECAgAAAgCAIBAA=</HashCode>
+      <HashCode>AMAEAAAAQAAAAAAAAAAAAAABARABBECAgAAAgCAIBAA=</HashCode>
       <FileName>shape.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Line">
+  <Class Name="Line" Collapsed="true">
     <Position X="4.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACABAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAgACABAAA=</HashCode>
       <FileName>shape.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Circle">
+  <Class Name="Circle" Collapsed="true">
     <Position X="4.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAACAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAkAAAAAAAAgACAAAAA=</HashCode>
       <FileName>shape.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Rectangle_">
+  <Class Name="Rectangle_" Collapsed="true">
     <Position X="4.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAgACAAAAA=</HashCode>
       <FileName>shape.h</FileName>
     </TypeIdentifier>
   </Class>

@@ -1,3 +1,10 @@
+/****************************************************************
+*																*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
 #include "point.h"
 #include <graphics.h>
 #include <stdexcept>
@@ -19,9 +26,7 @@ Point::Point(const Point & rhs) :
 
 bool Point::operator>(const Point& rhs) const
 {
-	if (x > rhs.x && y > rhs.y)
-		return true;
-	return false;
+	return (x > rhs.x && y > rhs.y);
 }
 
 Point Point::operator+(const Point& rhs)
@@ -34,16 +39,12 @@ Point Point::operator+(const Point& rhs)
 
 bool Point::operator==(const Point& rhs) const
 {
-	if (x == rhs.x && y == rhs.y)
-		return true;
-	return false;
+	return (x == rhs.x && y == rhs.y);
 }
 
 bool Point::operator!=(const Point& rhs) const
 {
-	if (x == rhs.x && y == rhs.y)
-		return false;
-	return true;
+	return !operator==(rhs);
 }
 
 int& Point::operator[](size_t index)

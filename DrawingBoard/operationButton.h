@@ -1,7 +1,14 @@
+/****************************************************************
+*																*
+* 本头文件包含了操作按钮基类，以及操作按钮的子类们    				*
+* 操作按钮子类有清屏、退出、保存、读取、撤销、复原					*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
 #ifndef OPERATION_BUTTON_H
 #define OPERATION_BUTTON_H
-// 本头文件中包含了操作按钮类及其子类和用于实现子类操作的非成员函数：
-// 清屏按钮类、退出按钮类、撤销按钮类、复原按钮类、读取按钮类、写入按钮类
 
 #include "buttonBase.h"
 #include "shape.h"
@@ -14,14 +21,16 @@
 #error 编译器应使用C++17及以后版本！
 #endif // _MSVC_LANG >= 201703L || __cplusplus >= 201703L
 
-// 操作按钮，用于实现各种操作
+// 操作按钮抽象类，用于实现各种操作
 // 继承了按钮基类，有各种操作的子类
 // 字段中包含buffer，作为撤销内容的缓冲区
 // 被撤销的内容首先存入buffer中，如果没有被复原，则清空buffer 
 class OperationButton : public ButtonBase
 {
 public:
-	static std::vector<Shape*> buffer; // 缓冲区，用于存储被撤销掉的图形
+	// 缓冲数组，用于存储被撤销掉的图形
+	// 当画图时，清空此数组
+	static std::vector<Shape*> buffer; 
 
 	OperationButton(const Point& pt1_, const Point& pt2_);
 	virtual void init() = 0;
@@ -81,6 +90,9 @@ public:
 	ReadButton(const Point& pt1_, const Point& pt2_);
 	virtual void init();
 	virtual void operation();
+
+private:
+	// 从文件中读取数据，不需要被类外调用
 	void readShape(std::ifstream& ifs, Shape& shape, std::smatch& s, std::string& str);
 };
 
@@ -97,6 +109,6 @@ public:
 
 // 两个非成员函数
 void clearPainting(); // 用于清屏
-void clearBuffer(); // 用于清空缓冲区中的形状
+void clearBuffer(); // 用于清空缓冲区中的图形
 
 #endif // OPERATION_BUTTON_H

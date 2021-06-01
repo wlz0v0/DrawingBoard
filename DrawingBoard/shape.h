@@ -1,12 +1,21 @@
+/****************************************************************
+*																*
+* 本头文件中包含形状抽象基类及其子类和用于画图的非成员函数			*
+* 子类：直线类、圆类、矩形类、三角形类								*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
 #ifndef SHAPE_H
 #define SHAPE_H
-// 本头文件中包含形状抽象基类及其子类和用于画图的非成员函数：
-// 直线类、圆类、矩形类
+
 
 #include <vector>
 #include "color.h"
 #include "point.h"
 
+// 枚举常量，便于表示各种图形的类型
 enum TypeName
 {
 	typeLine = 1,
@@ -25,23 +34,27 @@ class Shape
 public:
 	static std::vector<Shape*> shapes;
 
-	explicit Shape(int type_); // 防止隐式类型转换
+	// 防止隐式类型转换
+	explicit Shape(int type_); 
 	Shape(const Color& color_, const Point& pt1_, const Point& pt2_,
 		bool isFill, int type);
 	virtual ~Shape() = default;
 
+	// setters
 	void setType(int type_);
 	void setColor(const Color& color_);
 	void setIsFill(bool isFill_);
 	void setPt1(int x_, int y_);
 	void setPt2(int x_, int y_);
 
+	// getters
 	Color getColor() const;
 	int getType() const;
 	Point getPt1() const;
 	Point getPt2() const;
 	static size_t getShapeCount();
 
+	// pure virtual function
 	virtual void drawShape() = 0; // draw function
 
 	friend std::ostream& operator<<(std::ostream& os, Shape& shape);
@@ -67,12 +80,12 @@ public:
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Line& line);
 	friend std::istream& operator>>(std::istream& is, Line& line);
-	bool operator<(const Line& rhs) const;
-	bool operator<=(const Line& rhs) const;
-	bool operator>(const Line& rhs) const;
-	bool operator>=(const Line& rhs) const;
-	bool operator==(const Line& rhs) const;
-	bool operator!=(const Line& rhs) const;
+	inline bool operator<(const Line& rhs) const;
+	inline bool operator<=(const Line& rhs) const;
+	inline bool operator>(const Line& rhs) const;
+	inline bool operator>=(const Line& rhs) const;
+	inline bool operator==(const Line& rhs) const;
+	inline bool operator!=(const Line& rhs) const;
 	Line& operator=(const Line& rhs);
 	Point& operator[](int index);
 };
@@ -90,12 +103,12 @@ public:
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Circle& circle);
 	friend std::istream& operator>>(std::istream& is, Circle& circle);
-	bool operator<(const Circle& rhs) const;
-	bool operator<=(const Circle& rhs) const;
-	bool operator>(const Circle& rhs) const;
-	bool operator>=(const Circle& rhs) const;
-	bool operator==(const Circle& rhs) const;
-	bool operator!=(const Circle& rhs) const;
+	inline bool operator<(const Circle& rhs) const;
+	inline bool operator<=(const Circle& rhs) const;
+	inline bool operator>(const Circle& rhs) const;
+	inline bool operator>=(const Circle& rhs) const;
+	inline bool operator==(const Circle& rhs) const;
+	inline bool operator!=(const Circle& rhs) const;
 	Circle& operator=(const Circle& rhs);
 	Point& operator[](int index);
 };
@@ -115,12 +128,12 @@ public:
 	virtual void drawShape();
 	friend std::ostream& operator<<(std::ostream& os, Rectangle_& rectangle);
 	friend std::istream& operator>>(std::istream& is, Rectangle_& rectangle);
-	bool operator<(const Rectangle_& rhs) const;
-	bool operator<=(const Rectangle_& rhs) const;
-	bool operator>(const Rectangle_& rhs) const;
-	bool operator>=(const Rectangle_& rhs) const;
-	bool operator==(const Rectangle_& rhs) const;
-	bool operator!=(const Rectangle_& rhs) const;
+	inline bool operator<(const Rectangle_& rhs) const;
+	inline bool operator<=(const Rectangle_& rhs) const;
+	inline bool operator>(const Rectangle_& rhs) const;
+	inline bool operator>=(const Rectangle_& rhs) const;
+	inline bool operator==(const Rectangle_& rhs) const;
+	inline bool operator!=(const Rectangle_& rhs) const;
 	Rectangle_& operator=(const Rectangle_& rhs);
 	Point& operator[](int index);
 };
@@ -131,14 +144,15 @@ public:
 // 
 class Triangle : public Shape
 {
-private:
-	Point pt3;
 public:
 	Triangle();
 	Triangle(const Triangle& rhs);
 	Point getPt3();
 	void setPt3(const Point& pt3_);
 	virtual void drawShape();
+
+private:
+	Point pt3;
 };
 
 // 非成员函数

@@ -1,3 +1,11 @@
+/****************************************************************
+*																*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
+#include "operationButton.h"
 #include <graphics.h>
 #include <vector>
 #include <iterator>
@@ -5,7 +13,7 @@
 #include <exception>
 #include <string>
 #include <stdexcept>
-#include "operationButton.h"
+#include <cassert>
 
 //extern bool isExit;
 std::vector<Shape*> OperationButton::buffer;
@@ -34,8 +42,10 @@ void ClearButton::init()
 
 void ClearButton::operation()
 {
-	clearPainting(); // 清除图画内容
-	clearShapes();   // 清除保存数据
+	// 清除图画内容
+	clearPainting();
+	// 清除保存数据
+	clearShapes();   
 }
 
 ExitButton::ExitButton(const Point& pt1_, const Point& pt2_) :
@@ -52,9 +62,13 @@ void ExitButton::init()
 
 void ExitButton::operation()
 {
-	clearBuffer(); // 清空缓冲区
-	clearShapes(); // 清空形状
-	closegraph();  // 退出画板
+	// 清空缓冲区
+	clearBuffer();
+	// 清空形状
+	clearShapes(); 
+	// 退出画板
+	closegraph(); 
+	// 退出程序
 	exit(0);
 }
 
@@ -74,8 +88,11 @@ void CancelButton::operation()
 {
 	if (Shape::shapes.empty())
 		return;
-	OperationButton::buffer.push_back(Shape::shapes.back()); // shapes尾部元素压入buffer
-	Shape::shapes.pop_back(); // shapes尾部元素弹出
+	// 先将shapes尾部元素压入buffer
+	// 再把shapes尾部元素弹出，也可以用个stack啥的，不一定vector
+	OperationButton::buffer.push_back(Shape::shapes.back()); 
+	Shape::shapes.pop_back(); 
+	// 清屏后将shapes中剩余的图形重新画出
 	clearPainting();
 	drawShapes();
 }
@@ -96,8 +113,11 @@ void RestoreButton::operation()
 {
 	if (OperationButton::buffer.empty())
 		return;
-	Shape::shapes.push_back(buffer.back()); // buffer尾部元素压入shapes
-	OperationButton::buffer.pop_back(); // buffer尾部元素弹出
+	// buffer尾部元素压入shapes
+	// buffer尾部元素弹出，也可以用个stack啥的，不一定vector
+	Shape::shapes.push_back(buffer.back());
+	OperationButton::buffer.pop_back();
+	// 清屏后将shapes中剩余的图形重新画出
 	clearPainting();
 	drawShapes();
 }
@@ -136,6 +156,15 @@ void ReadButton::init()
 	rectangle(pt1.x, pt1.y, pt2.x, pt2.y);
 }
 
+// 
+// 读取流程：
+// 调用readShape函数来读取数据
+// 首先使用getline函数获取一行数据
+// 再使用正则表达式判断数据格式是否正确
+//	 若正确则再判断数据的范围是否正确
+//	   正确则将图形压入存储图形的数组shapes中
+//     不正确则throw跳过该图形并进行下一个图形的读取
+//   不正确则throw跳过该图形并进行下一个图形的读取
 void ReadButton::operation()
 {
 	std::ifstream ifs(filePath);
@@ -145,8 +174,12 @@ void ReadButton::operation()
 	Line* aLine;
 	Circle* aCircle;
 	Rectangle_* aRectangle;
-	clearPainting(); // 清除图画内容
-	clearShapes();   // 清除保存数据
+
+	// 由于要从文件中读取数据并画出，
+	// 故需要清除图画内容并清除保存数据
+	// 不这么做也会崩掉
+	clearPainting(); 
+	clearShapes();   
 	while (!ifs.eof())
 	{
 		try
@@ -154,6 +187,11 @@ void ReadButton::operation()
 			std::getline(ifs, str); // type
 			if (std::regex_match(str, s, typePattern))
 				type = std::stoi(s[0]);
+			// 由于在最后一个图形输出到文本之后还会换行，
+			// 所以最后一个读入的str为空才会到达eof，
+			// 不进行判断则会继续往下读取
+			// 但此时文件已读取完毕，所以读取的全为空
+			// 故加上这个判空，以便在读到最后一行空行时停止读取
 			else if (str.empty())
 				break;
 			else
@@ -178,6 +216,9 @@ void ReadButton::operation()
 				//checkInputShape(*aRectangle);
 				Shape::shapes.push_back(aRectangle);
 				break;
+			default:
+				// 程序运行正常时不应该进入default，防bug
+				assert(false);
 			}
 		}
 		catch (std::runtime_error& error)
@@ -189,39 +230,61 @@ void ReadButton::operation()
 	drawShapes();
 }
 
+// 本函数用于按行读取数据，
+// 并且对数据的正确性进行检查，
+// str用于保存按行读取的字符串
+// s用于保存按照正则表达式匹配后提取出的数据
 void ReadButton::readShape(std::ifstream& ifs, Shape& shape, std::smatch& s, std::string& str)
 {
-	std::getline(ifs, str); // type
+	// type
+	std::getline(ifs, str); 
+	// str为空说明读到了eof
 	if (str.empty())
 		return;
+
 	if (std::regex_match(str, s, typePattern))
 		shape.setType(std::stoi(s[0]));
 	else
 		throw std::runtime_error("Error type!");
-	std::getline(ifs, str); // isFill
+
+	// isFill
+	std::getline(ifs, str); 
 	if (std::regex_match(str, s, isFillPattern))
 		shape.setIsFill(std::stoi(s[0]));
 	else
 		throw std::runtime_error("Error isFill!");
-	std::getline(ifs, str); // color
+
+	// color
+	std::getline(ifs, str); 
 	if (std::regex_match(str, s, colorPattern))
 		shape.setColor(
 			Color(
 				std::stoi(s[1]),
 				std::stoi(s[2]),
 				std::stoi(s[3])));
+	/*
+	* 此处应该有读取进来的颜色的范围检查（0~255）
+	*/
 	else
 		throw std::runtime_error("Error color!");
+
+	// point1
 	std::getline(ifs, str);
 	if (std::regex_match(str, s, pointPattern))
-	{
 		shape.setPt1(std::stoi(s[1]), std::stoi(s[2]));
-	}
+	/*
+	* 此处应该有读取进来的点的范围检查x(0~940), y(0~700)
+	*/
 	else
 		throw std::runtime_error("Error point!");
+
+	// point2
 	std::getline(ifs, str);
 	if (std::regex_match(str, s, pointPattern))
 		shape.setPt2(std::stoi(s[1]), std::stoi(s[2]));
+	/*
+	* 此处应该有读取进来的点的范围检查x(0~940), y(0~700)
+	*/
 	else
 		throw std::runtime_error("Error point!");
 }
@@ -239,9 +302,10 @@ void clearPainting()
 	setfillcolor(fillcolor);
 }
 
+// 清空缓冲区
 void clearBuffer()
 {
-	//清空缓冲区
+	// 若为空则直接跳过
 	if (!OperationButton::buffer.empty())
 	{
 		for (auto it = OperationButton::buffer.begin(); it != OperationButton::buffer.end(); ++it)

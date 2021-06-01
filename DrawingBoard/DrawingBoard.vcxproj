@@ -165,7 +165,6 @@
     <ClInclude Include="shapeButton.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="hehe.txt" />
     <Text Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,13 @@
+/****************************************************************
+*																*
+* 本头文件包含了点类					    						*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
 #ifndef POINT_H
 #define POINT_H
-// 本头文件中包含点类
 
 #include <iostream>
 
@@ -10,9 +17,6 @@
 class Point
 {
 public:
-	int x;
-	int y;
-
 	Point();
 	Point(int x_, int y_);
 	Point(const Point& rhs);
@@ -23,6 +27,10 @@ public:
 	bool operator==(const Point& rhs) const;
 	bool operator!=(const Point& rhs) const;
 	int& operator[](size_t index);
+
+public:
+	int x;
+	int y;
 };
 
 #endif //POINT_H

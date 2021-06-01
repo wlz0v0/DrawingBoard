@@ -1,3 +1,10 @@
+/****************************************************************
+*																*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
 #include "shape.h"
 #include <graphics.h>
 #include <iostream>
@@ -137,8 +144,7 @@ bool Line::operator==(const Line& rhs) const
 
 bool Line::operator!=(const Line& rhs) const
 {
-	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) !=
-		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+	return !operator==(rhs);
 }
 
 Line& Line::operator=(const Line& rhs) 
@@ -149,7 +155,7 @@ Line& Line::operator=(const Line& rhs)
 	pt1 = rhs.pt1;
 	pt2 = rhs.pt2;
 	return *this;
-	///*deep copy
+	//deep copy
 	//下面所有拷贝得到的变量都应该是指针类型*/
 	//if (*this != rhs)
 	//{
@@ -242,8 +248,7 @@ bool Circle::operator==(const Circle& rhs) const
 
 bool Circle::operator!=(const Circle& rhs) const
 {
-	return sqrt(pow((pt2.x - pt1.x), 2) + pow((pt2.y - pt1.y), 2)) !=
-		sqrt(pow((rhs.pt2.x - rhs.pt1.x), 2) + pow((rhs.pt2.y - rhs.pt1.y), 2));
+	return !operator==(rhs);
 }
 
 Circle& Circle::operator=(const Circle& rhs)
@@ -341,8 +346,7 @@ bool Rectangle_::operator==(const Rectangle_& rhs) const
 
 bool Rectangle_::operator!=(const Rectangle_& rhs) const
 {
-	return abs(pt2.x - pt1.x) + abs(pt2.y - pt1.y) !=
-		abs(rhs.pt2.x - rhs.pt1.x) + abs(rhs.pt2.y - rhs.pt1.y);
+	return !operator==(rhs);
 }
 
 Rectangle_& Rectangle_::operator=(const Rectangle_& rhs)

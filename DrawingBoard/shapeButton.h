@@ -1,6 +1,15 @@
+/****************************************************************
+*																*
+* 本头文件中包含了形状按钮类及其子类：			    				*
+* 直线按钮类、圆按钮类、矩形按钮类									*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
 #ifndef SHAPE_BUTTON_H
 #define SHAPE_BUTTON_H
-// 本头文件中包含了形状按钮类及其子类：直线按钮类、圆按钮类、矩形按钮类
+// 
 
 #include "buttonBase.h"
 #include "shape.h"
@@ -37,9 +46,6 @@ public:
 // 圆有填充圆和空心圆
 class CircleButton final : public ShapeButton
 {
-private:
-	bool isFill;
-
 public:
 	CircleButton(const Point& pt1_, const Point& pt2_, bool isFill_);
 	virtual void init();
@@ -52,9 +58,6 @@ public:
 // 矩形有实心和空心
 class RectangleButton final : public ShapeButton
 {
-private:
-	bool isFill;
-
 public:
 	RectangleButton(const Point& pt1_, const Point& pt2_, bool isFill_);
 	virtual void init();

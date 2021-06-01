@@ -1,3 +1,10 @@
+/****************************************************************
+*																*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
 #include "color.h"
 #include <graphics.h>
 #include <stdexcept>
@@ -58,16 +65,13 @@ void Color::setGraphColor()
 
 bool Color::operator==(const Color& rhs) const
 {
-	if (red == rhs.red && green == rhs.green && blue == rhs.blue)
-		return true;
-	return false;
+	return (red == rhs.red && green == rhs.green && blue == rhs.blue);
 }
 
 bool Color::operator!=(const Color& rhs) const
 {
-	if (red == rhs.red && green == rhs.green && blue == rhs.blue)
-		return false;
-	return true;
+	// !=和==的结果相反
+	return !operator==(rhs);
 }
 
 int& Color::operator[](int index)

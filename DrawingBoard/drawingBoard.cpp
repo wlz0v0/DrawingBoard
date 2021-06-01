@@ -1,12 +1,21 @@
+/****************************************************************
+*																*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
+#include "drawingBoard.h"
 #include <vector>
 #include <graphics.h>
 #include <iterator>
 #include <algorithm>
-#include "drawingBoard.h"
+
 
 std::vector<ButtonBase*> DrawingBoard::buttons;
 //bool isExit = false;
 
+// 对所有按钮、画布初始化，并将按钮保存到动态数组中
 DrawingBoard::DrawingBoard() :
 	redButton(Point(20, 20), Point(40, 40), Color::colorset[0]),
 	orangeButton(Point(45, 20), Point(65, 40), Color::colorset[1]),
@@ -80,8 +89,11 @@ void DrawingBoard::initialize()
 	setfont(16, 0, "楷体");                                        //设置字体样式
 	setfillcolor(WHITE);
 
-	line(499, 20, 499, 720);                                       //打印一条竖线分隔画图区域
-	line(499, 19, 1440, 19);                                       //打印一条横线分隔画图区域
+	//打印一条竖线分隔画图区域
+	line(499, 20, 499, 720);   
+	//打印一条横线分隔画图区域
+	line(499, 19, 1440, 19);     
+
 	//以下打印坐标基本点                           
 	int coordinate;
 	for (coordinate = 0; coordinate <= 940; coordinate += 40)
@@ -93,11 +105,9 @@ void DrawingBoard::initialize()
 	}
 	setviewport(0, 0, 1440, 720);
 
-	//初始化按钮
-	for (auto it = buttons.begin(); it != buttons.end(); it++)
-	{
+	//利用按钮数组初始化按钮
+	for (auto it = buttons.begin(); it != buttons.end(); ++it)
 		(*it)->init();
-	}
 
 	//打印提示语句
 	setfont(16, 0, "楷体");
@@ -123,14 +133,27 @@ void DrawingBoard::chooseOperations()
 		choice = getmouse();
 		if (choice.is_down() && choice.is_left())
 		{
+			// 画布不继承按钮基类的缺陷，需要单独进行判断，不如直接遍历数组快捷
+			// 
+			// 原本放在判断按钮是否被点击之后，
+			// 由于用户会更多的画图，点击按钮次数较少，故将画布是否被点击的判断提前，
+			// 并且若成功则直接continue，可以减少判断次数
+			if (canvas.isClicked(choice))
+			{
+				canvas.operation(choice);
+				continue;
+			}
 			// 利用find_if函数和lambda表达式判断按钮是否被点击
+			// lambda表达式需要捕获鼠标点击的位置以判断按钮是否被点击
 			auto it = std::find_if(buttons.begin(),
 				buttons.end(),
 				[&choice](ButtonBase* aButton) { return aButton->isClicked(choice); });
+			
+			// find_if失败时返回尾迭代器
 			if (it != buttons.end())
 				(*it)->operation();
-			if (canvas.isClicked(choice))
-				canvas.operation(choice);
+			
+			// 较早版本的判断是否被点击
 			/*for (auto it = buttons.begin(); it != buttons.end(); it++)
 			{
 				if ((*it)->isClicked(choice))
@@ -148,6 +171,11 @@ void DrawingBoard::chooseOperations()
 	}
 }
 
+// 此函数名存实亡，原本用于退出前delete掉所有new出的变量
+// 后退出程序指令直接改在了退出按钮中，故此函数留作纪念
+// 更改原因是需要用到全局变量才方便使用退出按钮，
+// 不用全局变量的方法想到的只有函数中传参与直接将操作写在退出按钮中
+// 但传参不可行，因为虚函数operation无参，故只能把操作搬过去
 void DrawingBoard::exit()
 {
 	//clearBuffer(); // 清空缓冲区

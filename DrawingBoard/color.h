@@ -1,6 +1,14 @@
+/****************************************************************
+*																*
+* 本头文件包含了颜色类    										*
+* 颜色类与ege的color_t不同，使用了R,G,B三个变量分别存储RGB分量		*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
 #ifndef COLOR_H
 #define COLOR_H
-// 本头文件中包含了颜色类
 
 #include <iostream>
 #include <array>
@@ -16,13 +24,16 @@ public:
 	int red;
 	int green;
 	int blue;
-	const static std::array<Color, 17> colorset; // 预设的颜色
+	// 预设的颜色，主要用于颜色按钮的初始化
+	const static std::array<Color, 17> colorset; 
 
 	Color();
 	Color(int red_, int green_, int blue_);
 	Color& operator=(const Color& right);
 	~Color();
-	void setGraphColor(); // 用Color的实例设置画图的颜色
+	// 用Color的实例设置画图的颜色，包括填充色
+	void setGraphColor(); 
+	// 重载流运算符便于文件读写
 	friend std::ostream& operator<<(std::ostream& os, Color& color);
 	friend std::istream& operator>>(std::istream& is, Color& color);
 	bool operator==(const Color& rhs) const;

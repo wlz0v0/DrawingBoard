@@ -1,3 +1,10 @@
+/****************************************************************
+*																*
+* Github https://github.com/wlz0v0/DrawingBoard cpp branch      *
+* lab 4															*
+*                                                               *
+*****************************************************************/
+
 #include "shapeButton.h"
 #include "operationButton.h"
 #include "canvas.h"
@@ -21,15 +28,13 @@ void LineButton::init()
 
 void LineButton::operation()
 {
-	clearBuffer();
 	Canvas::setTypeDrawed(1);
 	xyprintf(380, 110, "         ");
 	xyprintf(380, 110, "Ö±Ïß");
 }
 
 CircleButton::CircleButton(const Point& pt1_, const Point& pt2_, bool isFill_) :
-	ShapeButton(pt1_, pt2_, isFill_),
-	isFill(isFill_)
+	ShapeButton(pt1_, pt2_, isFill_)
 {}
 
 void CircleButton::init()
@@ -58,7 +63,6 @@ void CircleButton::init()
 
 void CircleButton::operation()
 {
-	clearBuffer();
 	if (isFill)
 	{
 		Canvas::setTypeDrawed(5);
@@ -74,8 +78,7 @@ void CircleButton::operation()
 }
 
 RectangleButton::RectangleButton(const Point& pt1_, const Point& pt2_, bool isFill_) :
-	ShapeButton(pt1_, pt2_, isFill_),
-	isFill(isFill_)
+	ShapeButton(pt1_, pt2_, isFill_)
 {}
 
 void RectangleButton::init()
@@ -94,7 +97,6 @@ void RectangleButton::init()
 
 void RectangleButton::operation()
 {
-	clearBuffer();
 	if (isFill)
 	{
 		Canvas::setTypeDrawed(3);
